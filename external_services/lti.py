@@ -63,7 +63,8 @@ class LTIRequest(object):
             "launch_presentation_return_url": request.scheme + '://' + request.get_host() + instance.get_absolute_url(),
 
             "tool_consumer_instance_guid": request.get_host() + "/aplus",
-            "tool_consumer_instance_name": "A+ LMS",
+            "tool_consumer_instance_name":  settings.BRAND_NAME + " LMS",
+            
         })
 
         if service.api_access:
