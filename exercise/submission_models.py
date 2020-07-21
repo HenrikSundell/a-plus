@@ -8,7 +8,7 @@ from django.core.files.storage import default_storage
 from django.db import models, DatabaseError
 from django.db.models.signals import post_delete
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language, ugettext_lazy as _
 from mimetypes import guess_type
 
 from lib.fields import JSONField, PercentField
@@ -36,6 +36,8 @@ class SubmissionManager(models.Manager):
         ]
         try:
             meta_data_dict = json.loads(request.POST.get('__aplus__', '{}'))
+            if 'lang' not in meta_data_dict:
+                meta_data_dict['lang'] = get_language()
         except json.JSONDecodeError:
             raise ValueError("The content of the field __aplus__ is not valid json")
         try:

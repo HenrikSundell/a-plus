@@ -706,8 +706,6 @@ class BaseExercise(LearningObject):
         """
         # Get the language from the submission
         language = submission.lang
-        if language is None:
-            language = submission.meta_data['lang'] = get_language()
 
         submission_url = update_url_params(
             api_reverse("submission-grader", kwargs={
